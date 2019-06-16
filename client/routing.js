@@ -42,8 +42,9 @@ const Routing = () => {
       {context => (
         <Router hashType="slash">
           <RenderContainer>
-            <NoAuthRoute exact path="/login" component={Login} />
+            <NoAuthRoute path="/" exact component={Login} />
             <NoAuthRoute exact path="/register" component={Register} />
+            <NoAuthRoute exact path="/login" component={Login} />
             <PrivateRoute path="/home" component={Home} context={context} />
           </RenderContainer>
         </Router>

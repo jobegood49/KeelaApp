@@ -12,6 +12,11 @@ class RenderContainer extends React.Component {
       user: { profile: null }
     };
   }
+
+  createNewTeam(data){
+    Meteor.call('teams.insert', data);
+  }
+
   setUserProfileData(data) {
     this.setState({ user: data });
   }
@@ -64,7 +69,8 @@ class RenderContainer extends React.Component {
           state: this.state,
           setUserProfileData: this.setUserProfileData.bind(this),
           handleLogin: this.handleLogin.bind(this),
-          handleRegister: this.handleRegister.bind(this)
+          handleRegister: this.handleRegister.bind(this),
+          createNewTeam : this.createNewTeam.bind(this),
         }}
       >
         {this.props.children}
