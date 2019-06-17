@@ -133,14 +133,6 @@ Login = (props) => {
                           <i className="fa fa-facebook pull-left" /> Login with
                           Facebook
                         </button>
-                        <button
-                          className="btn btn-block btn-info push-10"
-                          type="button"
-                        >
-                          <i className="fa fa-share-alt pull-right" />
-                          <i className="fa fa-twitter pull-left" /> Share on
-                          Twitter
-                        </button>
                       </div>
                     </div>
                   </form>
