@@ -25,7 +25,7 @@ class DashboardMain extends React.Component {
       if (id) {
         const data =  Meteor.users.findOne({ _id: id });
         if(data){
-          alert('i got the data and username is -- ' + data.username);
+          // alert('i got the data and username is -- ' + data.username);
           this.context.setUserProfileData(data);
           // if no data means lets logout 
         } else {

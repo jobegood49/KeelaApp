@@ -13,8 +13,27 @@ class RenderContainer extends React.Component {
     };
   }
 
-  createNewTeam(data){
-    Meteor.call('teams.insert', data);
+  createNewTeam(data) {
+    Meteor.call("teams.insert", data);
+  }
+
+  joinTeam(data, id = null) {
+    // sending ID from manage Team page
+    const payload = {
+      teamId: data._id,
+      members: data.members || [],
+      userId: id || Meteor.userId()
+    };
+    Meteor.call("teams.joinTeam", payload, err => {
+      if (err) {
+        console.log("unable to join team");
+      } else {
+        console.log("Joined successfully");
+        if (id) {
+          this.props.history.push("/home/teams");
+        }
+      }
+    });
   }
 
   setUserProfileData(data) {
@@ -70,7 +89,8 @@ class RenderContainer extends React.Component {
           setUserProfileData: this.setUserProfileData.bind(this),
           handleLogin: this.handleLogin.bind(this),
           handleRegister: this.handleRegister.bind(this),
-          createNewTeam : this.createNewTeam.bind(this),
+          createNewTeam: this.createNewTeam.bind(this),
+          joinTeam : this.joinTeam.bind(this)
         }}
       >
         {this.props.children}

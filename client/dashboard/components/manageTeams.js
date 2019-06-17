@@ -1,65 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import Select from "react-select";
+import ContextContainer from "../../context";
+import { Teams } from "../../../imports/api/Teams";
+import { withTracker } from "meteor/react-meteor-data";
+
 const ManageTeams = props => {
+  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedTeam, setSelectedTeam] = useState({});
+  const Context = useContext(ContextContainer);
+
+  const handelSubmit = e => {
+    e.preventDefault();
+    if (selectedUser.value && selectedTeam.value) {
+    //   console.log(selectedTeam, selectedUser);
+      Context.joinTeam(selectedTeam.value, selectedUser.value);
+    } else {
+    }
+  };
+  const userOption = props.users.map(i => {
+    return { value: i._id, label: i.username };
+  });
+  const teamOption = props.teams.map(i => {
+    return { value: i, label: i.name };
+  });
+
+  const handleTeamChange = selectedOption => {
+    console.log(selectedOption);
+    setSelectedTeam(selectedOption);
+  };
+  const handleUserChange = selectedOption => {
+    console.log(selectedOption);
+    setSelectedUser(selectedOption);
+  };
+
   return (
     <div id="main-container">
       <div className="content">
-        <div className="block">
-          <div className="block-header bg-gray-lighter">
-            <h3 className="block-title">Groups Dashboard</h3>
-          </div>
-          <div className="block-content">
-            <div className="table-responsive">
-              <table className="table table-striped table-vcenter">
-                <thead>
-                  <tr>
-                    <th className="text-center">
-                      <i className="si si-user" />
-                    </th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Access</th>
-                    <th className="text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="text-center">
-                      <img
-                        className="img-avatar img-avatar48"
-                        src="assets/img/avatars/avatar1.jpg"
-                        alt=""
+        <h2 className="content-heading">Manage Teams</h2>
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="block block-themed">
+              <div className="block-header bg-info">
+                <h3 className="block-title">Search User and Add Teams</h3>
+              </div>
+              <div className="block-content">
+                <form className="form-horizontal push-5-t">
+                  <div className="form-group">
+                    <label className="col-xs-12" htmlFor="example-select">
+                      Select User
+                    </label>
+                    <div className="col-sm-9">
+                      <Select
+                        value={selectedUser}
+                        onChange={handleUserChange}
+                        options={userOption}
                       />
-                    </td>
-                    <td className="font-w600">Rebecca Reid</td>
-                    <td>client1@example.com</td>
-                    <td>
-                      <span className="label label-success">VIP</span>
-                    </td>
-                    <td className="text-center">
-                      <div className="btn-group">
-                        <button
-                          className="btn btn-xs btn-default"
-                          type="button"
-                          data-toggle="tooltip"
-                          title=""
-                          data-original-title="Edit Client"
-                        >
-                          <i className="fa fa-pencil" />
-                        </button>
-                        <button
-                          className="btn btn-xs btn-default"
-                          type="button"
-                          data-toggle="tooltip"
-                          title=""
-                          data-original-title="Remove Client"
-                        >
-                          <i className="fa fa-times" />
-                        </button>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="col-xs-12">
+                      <div className="form-group">
+                        <label className="col-xs-12" htmlFor="example-select">
+                          Select Team
+                        </label>
+                        <div className="col-sm-9">
+                          {" "}
+                          <Select
+                            value={selectedTeam}
+                            onChange={handleTeamChange}
+                            options={teamOption}
+                          />
+                        </div>
                       </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="col-xs-12">
+                      <button
+                        className="btn btn-lg btn-info"
+                        onClick={handelSubmit}
+                        type="submit"
+                      >
+                        <i className="fa fa-send push-5-r" /> Add User to Group
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -68,4 +97,12 @@ const ManageTeams = props => {
   );
 };
 
-export default ManageTeams;
+export default withTracker(() => {
+  Meteor.subscribe("teams");
+  const team = Teams.find({}, { sort: { createdAt: -1 } }).fetch();
+  const user = Meteor.users.find({}).fetch();
+  return {
+    teams: team,
+    users: user
+  };
+})(ManageTeams);
