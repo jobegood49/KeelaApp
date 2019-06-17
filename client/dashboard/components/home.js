@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ContainerContext from "../../context";
 import { Meteor } from "meteor/meteor";
-import {withTracker} from "meteor/react-meteor-data"
+import {withTracker} from "meteor/react-meteor-data";
+import { Teams } from '../../../imports/api/Teams';
+
 
 
 const Home = props => {
@@ -9,10 +11,51 @@ const Home = props => {
   const [email, setEmail] = useState("");
   const [data, setData] = useState({});
 
+  const TeamsDataTable = props.filteredTeams.map((item, index) => {
+    return (
+      <tr key={index}>
+        <td className="text-center">
+          <img
+            className="img-avatar img-avatar48"
+            src="assets/img/avatars/avatar1.jpg"
+            alt=""
+          />
+        </td>
+        <td className="font-w600">{item.name}</td>
+        <td>{item.description}</td>
+        <td>
+          <span className="label label-success">Not Joined</span>
+        </td>
+        <td className="text-center">
+          <div className="btn-group">
+            <button
+              className="btn btn-xs btn-default"
+              type="button"
+              data-toggle="tooltip"
+              title=""
+              data-original-title="Edit Client"
+            >
+              <i className="fa fa-pencil" />
+            </button>
+            <button
+              className="btn btn-xs btn-default"
+              type="button"
+              data-toggle="tooltip"
+              title=""
+              data-original-title="Remove Client"
+            >
+              <i className="fa fa-times" />
+            </button>
+          </div>
+        </td>
+      </tr>
+    );
+  });
+
   return (
     <ContainerContext.Consumer>
       {context => {
-        console.log(context, "this is the context")
+        console.log(props.filteredTeams, "this is the context")
 
         if (context.state.user && context.state.user.emails) {
           setUsername(context.state.user.username);
@@ -262,6 +305,22 @@ const Home = props => {
                 </div>
               </div>
             </div>
+            <div className="table-responsive">
+                <table className="table table-striped table-vcenter">
+                  <thead>
+                    <tr>
+                      <th className="text-center">
+                        <i className="si si-users" />
+                      </th>
+                      <th>Team Name</th>
+                      <th>Team Objective</th>
+                      <th>Join Status</th>
+                      <th className="text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>{TeamsDataTable}</tbody>
+                </table>
+              </div>
           </div>
         );
       }}
@@ -270,8 +329,15 @@ const Home = props => {
 };
 
 export default withTracker((props)=> {
+  Meteor.subscribe('teams');
   const users= Meteor.users.find({}).fetch()
+  const teams= Teams.find({}).fetch()
+  const filteredTeams = teams.filter((team) =>{
+    return team.members.includes(Meteor.userId())
+  })
   return {
-    users: users
+    users: users,
+    teams: teams,
+    filteredTeams: filteredTeams
   }
 })(Home);
