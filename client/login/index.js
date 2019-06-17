@@ -77,7 +77,7 @@ Login = (props) => {
                           <input
                             className="form-control"
                             type="text"
-                            placeholder="useremailname"
+                            placeholder=""
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             id="login-email"
