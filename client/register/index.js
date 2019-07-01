@@ -5,14 +5,12 @@ import AppLoader from "../components/common/loader";
 import util from "../components/common/helper";
 
 const Register = props => {
-  console.log("this is the register");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const Context = useContext(ContextContainer);
-  console.log(Context);
 
   const formSubmit = e => {
     e.preventDefault();
