@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Meteor } from "meteor/meteor";
 import ContextContainer from "../context";
 import AppLoader from "../components/common/loader";
 

@@ -5,6 +5,7 @@ import Routing from "./routing"
 import {Meteor} from 'meteor/meteor'
 import './assets/css/toastify.css';
 import { toast } from 'react-toastify';
+import './assets/css/styles.css'
 
 
 toast.configure({
@@ -12,6 +13,7 @@ toast.configure({
   draggable: false,
   //etc you get the idea
 });
+
 Meteor.startup(() => {
   ReactDOM.render(<Routing />, document.querySelector("#app"));
 });
