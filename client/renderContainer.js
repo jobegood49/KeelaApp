@@ -2,6 +2,8 @@ import React from "react";
 import ContainerContext from "./context";
 import { withRouter } from "react-router-dom";
 import { Accounts } from "meteor/accounts-base";
+import { toast } from 'react-toastify';
+
 // import { Meteor } from 'meteor/meteor';
 
 class RenderContainer extends React.Component {
@@ -43,7 +45,9 @@ class RenderContainer extends React.Component {
     this.setState({ loading: true });
     Meteor.loginWithPassword(data.email, data.password, err => {
       if (err) {
+        console.log('inside toast')
         this.setState({ loading: false });
+        toast(err.message ? err.message : 'error occured')
       } else {
         this.setState({ loading: false });
         this.props.history.push("/home/profile");
