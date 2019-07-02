@@ -13,7 +13,7 @@ const ManageProfile = props => {
             <form
               className="form-horizontal push-10-t push-10"
               action="base_forms_premade.html"
-              onSubmit={()=>console.log("")}
+              onSubmit={() => console.log("")}
             >
               <div className="row">
                 <div className="col-sm-7">
@@ -24,7 +24,9 @@ const ManageProfile = props => {
                         className="form-control input-lg"
                         type="text"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         id="mega-firstname"
                         name="mega-firstname"
                         placeholder="Enter your firstname.."
@@ -36,7 +38,9 @@ const ManageProfile = props => {
                         className="form-control input-lg"
                         type="text"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         id="mega-lastname"
                         name="mega-lastname"
                         placeholder="Enter your lastname.."
@@ -52,7 +56,9 @@ const ManageProfile = props => {
                         className="form-control input-lg"
                         type="text"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         id="mega-username"
                         name="mega-username"
                         placeholder="Enter your username.."
@@ -70,7 +76,9 @@ const ManageProfile = props => {
                         className="form-control input-lg"
                         type="text"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         id="mega-bio"
                         name="mega-bio"
                         rows="22"
@@ -87,7 +95,9 @@ const ManageProfile = props => {
                         className="form-control input-lg"
                         type="text"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         id="mega-city"
                         name="mega-city"
                         placeholder="Enter your location.."
@@ -114,7 +124,9 @@ const ManageProfile = props => {
                       <input
                         className="form-control input-lg"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         type="text"
                         id="mega-age"
                         name="mega-age"
@@ -128,7 +140,9 @@ const ManageProfile = props => {
                       <input
                         className="form-control input-lg"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         type="text"
                         id="mega-age"
                         name="mega-age"
@@ -142,7 +156,9 @@ const ManageProfile = props => {
                       <input
                         className="form-control input-lg"
                         value=""
-                        onChange={() => {console.log("")}}
+                        onChange={() => {
+                          console.log("");
+                        }}
                         type="number"
                         id="mega-age"
                         name="mega-age"

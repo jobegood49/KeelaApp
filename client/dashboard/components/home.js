@@ -55,7 +55,7 @@ const Home = props => {
   return (
     <ContainerContext.Consumer>
       {context => {
-        console.log(props.filteredTeams, "this is the context")
+        console.log(context, "this is the context")
 
         if (context.state.user && context.state.user.emails) {
           setUsername(context.state.user.username);

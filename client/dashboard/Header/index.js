@@ -2,6 +2,7 @@ import React from "react";
 import "./header.css";
 
 const Header = props => {
+  console.log(props,'proops')
   return (
     <header id="header-navbar" className="content-mini content-mini-full">
       <ul className="nav-header pull-right">
