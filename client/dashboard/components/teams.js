@@ -22,6 +22,8 @@ const TeamsComponent = props => {
     }
   };
   const TeamsDataTable = props.teams.map((item, index) => {
+    const userId = Meteor.userId();
+    console.log(item)
     return (
       <tr key={index}>
         <td className="text-center">
@@ -34,7 +36,7 @@ const TeamsComponent = props => {
         <td className="font-w600">{item.name}</td>
         <td>{item.description}</td>
         <td>
-          <span className="label label-success">Not Joined</span>
+          <span className="label label-success">{(item.members && item.members.includes(userId))? 'Joined Group' : 'Not Joined'}</span>
         </td>
         <td className="text-center">
           <div className="btn-group">
